@@ -3389,30 +3389,32 @@ function initHorarioInteractivo() {
         });
     }
 
-    chrome.storage.onChanged.addListener((changes, area) => {
-        if (area !== 'local') return;
+    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.onChanged) {
+        chrome.storage.onChanged.addListener((changes, area) => {
+            if (area !== 'local') return;
 
-        if (changes.vistaMinimalistaActivada) {
-            const activado = changes.vistaMinimalistaActivada.newValue;
-            const estiloActual = document.getElementById('usat-overhaul-minimalista');
+            if (changes.vistaMinimalistaActivada) {
+                const activado = changes.vistaMinimalistaActivada.newValue;
+                const estiloActual = document.getElementById('usat-overhaul-minimalista');
 
-            if (activado !== false) {
-                initOverhaulMinimalista();
-            } else if (estiloActual) {
-                estiloActual.remove();
+                if (activado !== false) {
+                    initOverhaulMinimalista();
+                } else if (estiloActual) {
+                    estiloActual.remove();
+                }
             }
-        }
 
-        if (changes.vistaCursosActivada) {
-            const activado = changes.vistaCursosActivada.newValue;
-            const cssCursos = document.getElementById('css-limpieza-cursos');
+            if (changes.vistaCursosActivada) {
+                const activado = changes.vistaCursosActivada.newValue;
+                const cssCursos = document.getElementById('css-limpieza-cursos');
 
-            if (activado !== false) {
-                initCourseFilter();
-            } else if (cssCursos) {
-                cssCursos.remove();
+                if (activado !== false) {
+                    initCourseFilter();
+                } else if (cssCursos) {
+                    cssCursos.remove();
+                }
             }
-        }
-    });
+        });
+    }
 
     runExtension();
