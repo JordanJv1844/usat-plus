@@ -9,8 +9,7 @@
     "06_inline.js",
     "07_calculadora.js",
     "08_dashboard.js",
-    "09_horario.js",
-    "10_caratulas.js"
+    "09_horario.js"
   ],
   "rutas": [
     {
